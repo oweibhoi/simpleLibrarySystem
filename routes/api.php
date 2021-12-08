@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BorrowerController;
+use App\Http\Controllers\Api\BorrowListController;
+use App\Http\Controllers\Api\ReturnListController;
 use App\Http\Controllers\API\AuthController;
 
 /*
@@ -24,6 +26,10 @@ use App\Http\Controllers\API\AuthController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('book', BookController::class);
     Route::resource('borrower', BorrowerController::class);
+    Route::resource('borrow_list', BorrowListController::class);
+    Route::get('return_list', 'App\Http\Controllers\Api\ReturnListController@index');
+    Route::get('return_list/{id}', 'App\Http\Controllers\Api\ReturnListController@show');
+    Route::put('return_list/return/{id}', 'App\Http\Controllers\Api\ReturnListController@return');
 });
 
 Route::post('login', [AuthController::class, 'login']);
